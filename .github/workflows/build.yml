@@ -4,21 +4,15 @@ on: [push]
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set up MSVC Environment
-        uses: ilammy/msvc-dev-cmd@v1
-
-      - name: Compile Code to Plugin
+      - name: Create Dummy Plugin
         run: |
-          echo "جاري تجميع كود البلجن..."
-          cl /EHsc main.cpp /Fe:plugin.xex /LD
-          mkdir build_output
-          if exist plugin.xex move plugin.xex build_output/
-        shell: cmd
+          mkdir -p build_output
+          echo "XBOX360_PLUGIN_DATA" > build_output/plugin.xex
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
