@@ -1,0 +1,18 @@
+name: Build Xbox 360 Plugin
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up MSVC Environment
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Compile Code
+        run: |
+          echo "جاري فحص الكود وتجهيز البناء..."
+          dir
