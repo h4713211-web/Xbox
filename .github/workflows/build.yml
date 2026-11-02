@@ -12,7 +12,16 @@ jobs:
       - name: Set up MSVC Environment
         uses: ilammy/msvc-dev-cmd@v1
 
-      - name: Compile Code
+      - name: Compile Code to Plugin
         run: |
-          echo "جاري فحص الكود وتجهيز البناء..."
-          dir
+          echo "جاري تجميع كود البلجن..."
+          cl /EHsc main.cpp /Fe:plugin.xex /LD
+          mkdir build_output
+          if exist plugin.xex move plugin.xex build_output/
+        shell: cmd
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: xbox-plugin
+          path: build_output/
